@@ -68,3 +68,4 @@ select * from Songs.Tariff where OfflineModeTariff like 'No'
 select count(*) from songs.services where nameservice like 'T%'
 select sum(priceTariff) from songs.tariff where priceTariff < 100
 select * from Songs.Authors order by BirthDateAuthor asc 
+select count(*) from songs.authors 
