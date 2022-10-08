@@ -186,7 +186,7 @@ group by t.genresong
 
 	
 --15. Инструкция SELECT, консолидирующая данные с помощью предложения GROUP BY и предложения HAVING. 
--- Путевки, средняя цена которых больше средней цены общей
+-- Количество песен определенного жанра, 
 select t.genresong as "Genre",
 		count(*) as "Count"
 from Songs.Songs as t
@@ -270,7 +270,7 @@ order by yeartariffs
 
 
 --23. Инструкция SELECT, использующая рекурсивное обобщенное табличное выражение
--- Фигня какая-то
+--
 with recursive Recur(tariffid, pricetariff, countofuserstariff) as
 (
     select t.tariffid, t.pricetariff, t.countofuserstariff
@@ -315,3 +315,13 @@ t_inserted as(select namesong, authorname, country, row_number() over(partition 
 				
 select * from t
 drop table t
+
+
+--Защита
+-- Изменить названия тарифов, количество пользователей которых от 1000 до 3000
+select * from Songs.Tariff
+
+update Songs.Tariff 
+set TitleTariff = 'a'
+where CountOfUsersTariff > 1000 and CountOfUsersTariff < 3000 
+
