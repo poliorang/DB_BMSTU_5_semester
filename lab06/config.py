@@ -1,0 +1,5 @@
+db_name = 'postgres'
+db_user = 'postgres'
+ds_pass = 'postgres'
+db_host = 'localhost'
+db_port = '5432'
