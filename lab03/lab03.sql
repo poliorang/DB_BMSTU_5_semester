@@ -261,6 +261,77 @@ select * from songsTMP order by countryid
 
 
 
+
+
+-- Защита
+--Хранимая процедура доступа к метаданным
+--По названию таблицы вывести количество записей
+create or replace procedure metaData
+(
+	tablename varchar(100)
+)
+as 
+'
+begin
+	select count(column_name)
+	from information_schema.columns
+    where table_name = tablename;
+end;' 
+language plpgsql;
+
+
+create or replace function metaSongs(song varchar)
+returns int as
+'
+begin
+	select count(column_name)
+	from information_schema.columns
+    where table_name = tablename;
+end;'
+language plpgsql;
+
+select metaSongs('songs');
+
+
+
+create or replace procedure met
+(
+	tablename varchar(100)
+)
+as 
+'declare
+	buf record;
+    myCursor cursor 
+	for
+        select count(*) as c
+		from information_schema.columns 
+        where table_name = tablename;
+begin
+    open myCursor;
+    loop
+		fetch myCursor
+        into buf;
+		exit WHEN NOT FOUND;
+        raise notice ''% - column = %;'', tablename, buf.c;
+    end loop;
+	close myCursor;
+end;' 
+language plpgsql;
+
+call met('songs');
+
+
+create or replace function calcucale (tablename varchar)
+returns int as
+	'begin
+		select count(*)
+		from db[tablename];
+	end;'
+language plpgsql;
+
+select calcucale("songs")
+
+
 --Еще запросики
 --Наименьшая длина песни, из множества песен, которые были написаны в заданный промежуток времени
 create or replace function public.dateSong (minDate date, maxDate date)

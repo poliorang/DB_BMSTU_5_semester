@@ -69,7 +69,7 @@ def generate_services():
             randint(0, 100000),
             str(choice(WORDS))[2:-1].title() + choice(company_suffix),
             randint(1, 999),
-            '+' + str(randint(10000000000, 79999999999)),
+            str(randint(1000000, 99999999)),
             'Dir' + faker.name())
         f.write(line)
     f.close()

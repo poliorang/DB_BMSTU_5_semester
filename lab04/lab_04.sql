@@ -108,3 +108,27 @@ $$
 $$ language plpython3u;
 
 select * from tariff_base_info(2);
+
+
+-- Защита
+create or replace function similarCountry(id INT)
+returns table (NameSong varchar, NameService varchar, countryid int) as
+$$
+	plan = plpy.prepare("SELECT songs.NameSong, services.NameService, songs.countryid FROM Songs.services join Songs.songs on songs.CountryId = services.CountryId WHERE songs.CountryId = $1", ["int"])
+	res = plpy.execute(plan, [id])
+	res_table = list()
+	if res is not None:
+		for i in res:
+			res_table.append(i)
+	return res_table
+$$ language plpython3u;
+
+--drop function similarCountry
+
+select * from similarCountry(633);
+
+select * from songs.songs where countryid = 633
+select * from songs.services  where countryid = 633
+
+
+
