@@ -4,7 +4,7 @@ import psycopg2
 
 MENU = """
 0. Exit;
-1. Get max engine power;
+1. Get max price tariff;
 2. Get service and supported devices by car state number;
 3. Get young users;
 4. Get meta information about table; 
