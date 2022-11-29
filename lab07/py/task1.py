@@ -37,8 +37,8 @@ def print_first_requests(request, count=5):
 
 
 def task_1():
-	songs = Enumerable(create_song('songs.csv'))
-	countries = Enumerable(create_country('countries.csv'))
+	songs = Enumerable(create_song('../csv/songs.csv'))
+	countries = Enumerable(create_country('../csv/countries.csv'))
 
 	print('\n1. Songs longer than 1 minute:')
 	print_first_requests(request_1(songs))
